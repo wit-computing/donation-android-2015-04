@@ -2,6 +2,7 @@ package app.donation.model;
 
 public class Donation
 {
+  public Long   id;
   public int    amount;
   public String method;
 

@@ -2,6 +2,7 @@ package app.donation.model;
 
 public class User
 {
+  public Long   id;
   public String firstName;
   public String lastName;
   public String email;
