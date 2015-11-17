@@ -5,19 +5,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import app.donation.R;
 import app.donation.main.DonationApp;
 import app.donation.model.Donor;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
-public class Signup extends AppCompatActivity
+public class Signup extends AppCompatActivity implements Callback<Donor>
 {
+  private DonationApp app;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_signup);
+    app = (DonationApp) getApplication();
   }
 
   public void registerPressed (View view)
@@ -27,11 +34,26 @@ public class Signup extends AppCompatActivity
     TextView email     = (TextView)  findViewById(R.id.Email);
     TextView password  = (TextView)  findViewById(R.id.Password);
 
-    Donor user = new Donor(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
+    Donor donor = new Donor(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
 
     DonationApp app = (DonationApp) getApplication();
-    app.newUser(user);
+    Call<Donor> call = (Call<Donor>) app.donationService.createDonor(donor);
+    call.enqueue(this);
+  }
 
+  @Override
+  public void onResponse(Response<Donor> response, Retrofit retrofit)
+  {
+    app.donors.add(response.body());
+    startActivity(new Intent(this, Welcome.class));
+  }
+
+  @Override
+  public void onFailure(Throwable t)
+  {
+    app.donationServiceAvailable = false;
+    Toast toast = Toast.makeText(this, "Donation Service Unavailable. Try again later", Toast.LENGTH_LONG);
+    toast.show();
     startActivity (new Intent(this, Welcome.class));
   }
 }
