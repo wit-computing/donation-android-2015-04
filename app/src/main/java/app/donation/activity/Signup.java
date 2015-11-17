@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import app.donation.R;
 import app.donation.main.DonationApp;
-import app.donation.model.User;
+import app.donation.model.Donor;
 
 public class Signup extends AppCompatActivity
 {
@@ -27,7 +27,7 @@ public class Signup extends AppCompatActivity
     TextView email     = (TextView)  findViewById(R.id.Email);
     TextView password  = (TextView)  findViewById(R.id.Password);
 
-    User user = new User (firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
+    Donor user = new Donor(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
 
     DonationApp app = (DonationApp) getApplication();
     app.newUser(user);

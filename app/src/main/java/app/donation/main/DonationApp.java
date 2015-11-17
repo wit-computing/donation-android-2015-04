@@ -8,13 +8,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import app.donation.model.Donation;
-import app.donation.model.User;
+import app.donation.model.Donor;
 
 public class DonationApp extends Application
 {
   public final int       target       = 10000;
   public int             totalDonated = 0;
-  public List <User>      users       = new ArrayList<User>();
+  public List <Donor>      users       = new ArrayList<Donor>();
   public List <Donation> donations    = new ArrayList<Donation>();
 
   public boolean newDonation(Donation donation)
@@ -33,14 +33,14 @@ public class DonationApp extends Application
     return targetAchieved;
   }
 
-  public void newUser(User user)
+  public void newUser(Donor user)
   {
     users.add(user);
   }
 
   public boolean validUser (String email, String password)
   {
-    for (User user : users)
+    for (Donor user : users)
     {
       if (user.email.equals(email) && user.password.equals(password))
       {

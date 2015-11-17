@@ -1,6 +1,6 @@
 package app.donation.model;
 
-public class User
+public class Donor
 {
   public Long   id;
   public String firstName;
@@ -8,7 +8,7 @@ public class User
   public String email;
   public String password;
 
-  public User(String firstName, String lastName, String email, String password)
+  public Donor(String firstName, String lastName, String email, String password)
   {
     this.firstName = firstName;
     this.lastName = lastName;
