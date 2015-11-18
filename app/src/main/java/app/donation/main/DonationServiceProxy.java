@@ -38,11 +38,11 @@ public interface DonationServiceProxy
   Call<List<Donation>> getDonations(@Path("id") Long id);
 
   @GET("/api/donors/{id}/donations/{donationId}")
-  Call<Donation> getDonation(@Path("id") Long id, @Path("id") Long donationId);
+  Call<Donation> getDonation(@Path("id") Long id, @Path("donationId") Long donationId);
 
   @POST("/api/donors/{id}/donations")
   Call<Donation> createDonation(@Path("id") Long id, @Body Donation donation);
 
   @DELETE("/api/donors/{id}/donatinos/{donationId}")
-  Call<Donation> deleteDonation(@Path("id") Long id, @Path("id") Long donationId);
+  Call<Donation> deleteDonation(@Path("id") Long id, @Path("donationId") Long donationId);
 }
