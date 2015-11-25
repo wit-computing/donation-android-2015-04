@@ -31,4 +31,14 @@
   <string name="loginEmail">Email</string>
   <string name="loginPassword">Password</string>
   <string name="menuLogout">Logout</string>
+  <string name="refresh">Refresh list</string>
+
+  <string name="username_summary">Your email addresss</string>
+  <string name="username">Username</string>
+  <string name="password_summary">Input your password</string>
+  <string name="password">Password</string>
+  <string name="nmr_donations">Configure Downloads</string>
+  <string name="nmr_donations_summary">How many Donations to store locally?</string>
+  <string name="set_refresh_interval">Refresh</string>
+  <string name="set_refresh_interval_summary">Time between cloud updates (minutes)</string>
 </resources>

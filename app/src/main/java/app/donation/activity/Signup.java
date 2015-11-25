@@ -1,7 +1,7 @@
 package app.donation.activity;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,7 +15,7 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class Signup extends AppCompatActivity implements Callback<Donor>
+public class Signup extends Activity implements Callback<Donor>
 {
   private DonationApp app;
 

@@ -11,7 +11,7 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
-public interface DonationServiceProxy
+public interface  DonationServiceProxy
 {
   @GET("/api/donors")
   Call<List<Donor>> getAllDonors();

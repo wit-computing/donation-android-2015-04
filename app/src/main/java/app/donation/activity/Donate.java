@@ -1,7 +1,7 @@
 package app.donation.activity;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +23,7 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class Donate extends AppCompatActivity implements Callback<Donation>
+public class Donate extends Activity implements Callback<Donation>
 {
   private Button       donateButton;
   private RadioGroup   paymentMethod;

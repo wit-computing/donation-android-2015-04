@@ -1,5 +1,6 @@
 package app.donation.activity;
 
+import app.android.helpers.LogHelpers;
 import app.donation.R;
 import app.donation.main.DonationApp;
 import app.donation.model.Donor;
@@ -8,15 +9,15 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class Welcome extends AppCompatActivity implements Callback<List<Donor>>
+public class Welcome extends Activity implements Callback<List<Donor>>
 {
   private DonationApp app;
 
@@ -27,6 +28,8 @@ public class Welcome extends AppCompatActivity implements Callback<List<Donor>>
     setContentView(R.layout.activity_welcome);
 
     app = (DonationApp) getApplication();
+
+    LogHelpers.info(this, "Welcome.onCreate");
   }
 
   @Override
