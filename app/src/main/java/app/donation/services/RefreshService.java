@@ -28,8 +28,6 @@ public class RefreshService extends IntentService
   {
     app = (DonationApp) getApplication();
     Intent localIntent = new Intent(Report.BROADCAST_ACTION);
-    // Broadcasts the Intent to receivers in this app.
-    //LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent);
     Call<List<Donation>> call = (Call<List<Donation>>) app.donationService.getAllDonations();
     try
     {
@@ -39,7 +37,7 @@ public class RefreshService extends IntentService
     }
     catch (IOException e)
     {
-
+      LogHelpers.info(tag, "Failed to retrieve donations list - network error");
     }
   }
 
