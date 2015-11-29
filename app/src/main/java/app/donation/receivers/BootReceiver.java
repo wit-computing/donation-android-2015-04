@@ -8,12 +8,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import app.android.helpers.LogHelpers;
 import app.donation.services.RefreshService;
+import app.utils.NumUtil;
 
 
+/**
+ * If permission set and BootReceiver registered in manifest file ...
+ * and application manually launched, then...
+ * then BootReceiver.onReceive method will be invoked by system when device started.
+ * In this method we set the interval at which the alarm should trigger.
+ * This will be either a default or a value input by user in preference settings.
+ */
 public class BootReceiver extends BroadcastReceiver
 {
   private static final long DEFAULT_INTERVAL = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
@@ -23,18 +29,26 @@ public class BootReceiver extends BroadcastReceiver
   @Override
   public void onReceive(Context context, Intent intent)
   {
-    // Facilitates stopping at breakpoint placed onReceive code below
-    //android.os.Debug.waitForDebugger();
-
     Log.i(tag, "In BootReceiver.onReceive");
 
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-    // Set the refresh interval i.e. frequency of alarm triggers
-    long interval = Long.parseLong(prefs.getString("refresh_interval", Long.toString(DEFAULT_INTERVAL)));
+    // This key introduced in res/xml/settings.xml
+    String key = "refresh_interval";
+    long interval = DEFAULT_INTERVAL;
+    // We check for a valid user inputted interval and use it if it exists
+    // Otherwise use DEFAULT_INTERVAL
+    String value = prefs.getString(key, Long.toString(DEFAULT_INTERVAL));
+    if (NumUtil.isPositiveNumber(value))
+    {
+      interval = Long.parseLong(value);
+    }
+    // Convert interval from minutes to milliseconds
     interval *= 60000;//here we convert minutes to milliseconds since input at settings menu is specified in minutes
-    interval = interval < 60000 ? 60000 : interval; //Set 60 seconds as the minimum as counter to denial of service attack
+    // Set an arbitrary minimum interval value of 60 seconds to avoid overloading service.
+    interval = interval < 60000 ? 60000 : interval;
 
+    // Prepare an PendingIntent with a view to triggering RefreshService
     PendingIntent operation = PendingIntent.getService(
         context,
         REQUESTCODE,
@@ -46,7 +60,7 @@ public class BootReceiver extends BroadcastReceiver
     alarmManager.cancel(operation);//cancel any existing alarms with matching intent
     alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), interval, operation);
 
-    LogHelpers.info(this, "setting repeat operation for: " + interval);
-    LogHelpers.info(this, "onReceived");
+    long appliedInterval = interval/60000;
+    Log.i(tag, "Boot receiver alarm repeats every: " + appliedInterval + " minutes.");
   }
 }
