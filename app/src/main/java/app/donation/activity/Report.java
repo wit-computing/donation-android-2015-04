@@ -124,7 +124,7 @@ public class Report extends Activity implements Callback<List<Donation>>
   //Broadcast receiver for receiving status updates from the IntentService
   private class ResponseReceiver extends BroadcastReceiver
   {
-    private void ResponseReceiver() {}
+    //private void ResponseReceiver() {}
     // Called when the BroadcastReceiver gets an Intent it's registered to receive
     @Override
     public void onReceive(Context context, Intent intent)
