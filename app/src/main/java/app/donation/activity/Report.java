@@ -88,6 +88,12 @@ public class Report extends Activity implements Callback<List<Donation>>
         startService(new Intent(this, RefreshService.class));
         //app.refreshDonationList();
         return true;
+
+      case R.id.clear_list:
+        app.clearReport();
+        adapter.notifyDataSetChanged();
+        return true;
+
     }
     return true;
   }

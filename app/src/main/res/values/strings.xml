@@ -41,4 +41,6 @@
   <string name="nmr_donations_summary">How many Donations to store locally?</string>
   <string name="set_refresh_interval">Refresh</string>
   <string name="set_refresh_interval_summary">Time between cloud updates (minutes)</string>
+
+  <string name="clear_list">Clear List</string>
 </resources>

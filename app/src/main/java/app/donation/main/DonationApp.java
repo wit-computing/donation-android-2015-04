@@ -93,7 +93,13 @@ public class DonationApp extends Application
     Log.v("Donation", "Donation App Started");
   }
 
-
+  /**
+   * Remove all donations from list
+   */
+  public void clearReport()
+  {
+    donations.clear();
+  }
 
   public void refreshDonationList()
   {
